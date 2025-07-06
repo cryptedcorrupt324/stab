@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>USERNAME | STAB</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+  <style>
+    body {
+      background-color: #000;
+      color: #0f0;
+      font-family: 'Press Start 2P', monospace;
+    }
+    .glow-text {
+      text-shadow: 0 0 6px #0f0, 0 0 12px #0f0, 0 0 20px #0f0;
+    }
+    .fade-in {
+      animation: fadeIn 1.2s ease-out forwards;
+    }
+    @keyframes fadeIn {
+      0% { opacity: 0; transform: translateY(25px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col items-center justify-center p-8 text-center">
+
+  <h1 class="text-3xl md:text-5xl glow-text fade-in mb-6">CRYPTED</h1>
+
+  <p class="text-green-300 text-sm md:text-base glow-text fade-in max-w-2xl">
+    owner.
+  </p>
+
+  <div class="mt-12">
+    <a href="staff.html" class="text-green-400 underline glow-text hover:text-green-200 transition duration-300">← Back to Staff</a>
+  </div>
+
+</body>
+</html>

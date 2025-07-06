@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Stab | Staff</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+  <style>
+    body {
+      background: #000;
+      color: #0f0;
+      font-family: 'Press Start 2P', monospace;
+    }
+    .glow-text {
+      text-shadow: 0 0 5px #0f0, 0 0 10px #0f0, 0 0 15px #0f0;
+    }
+    .fade-in {
+      animation: fadeIn 1.5s ease-out forwards;
+    }
+    @keyframes fadeIn {
+      0% { opacity: 0; transform: translateY(30px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col items-center justify-center p-6">
+
+  <h1 class="text-3xl md:text-5xl glow-text fade-in mb-10">STAB STAFF</h1>
+
+  <a href="crypted.html" class="w-full max-w-md bg-black border-2 border-green-500 p-6 rounded-lg glow-text fade-in transition hover:scale-105 duration-300">
+    <div class="flex flex-col items-center">
+      <img src="https://via.placeholder.com/150x150.png?text=STAFF" alt="Staff Profile" class="rounded-full border-4 border-green-500 mb-4">
+      <h2 class="text-base text-green-400">CRYPTED</h2>
+    </div>
+  </a>
+
+  <div class="mt-12">
+    <a href="index.html" class="text-green-400 underline glow-text hover:text-green-200 transition duration-300">← Back to Home</a>
+  </div>
+
+</body>
+</html>

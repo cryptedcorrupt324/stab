@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Stab</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+  <style>
+    body {
+      background-color: #000;
+      overflow: hidden;
+      font-family: 'Press Start 2P', monospace;
+    }
+
+    .glow-text {
+      text-shadow: 0 0 4px #0f0, 0 0 8px #0f0, 0 0 12px #0f0;
+    }
+
+    .fade-in {
+      animation: fadeIn 2s ease-out forwards;
+    }
+
+    @keyframes fadeIn {
+      0% { opacity: 0; transform: translateY(20px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body class="relative min-h-screen flex flex-col items-center justify-center text-green-400">
+
+  <!-- Particles background -->
+  <div id="particles-js" class="absolute inset-0 -z-10"></div>
+
+  <!-- Main content -->
+  <div class="text-center fade-in px-4">
+    <h1 class="text-4xl md:text-6xl font-bold glow-text mb-6">STAB</h1>
+    <p class="text-sm md:text-lg text-green-300 glow-text mb-8">I made this out of boredom.</p>
+    <div class="mt-6 flex flex-col sm:flex-row gap-6 items-center justify-center animate-pulse">
+      <a href="#" class="bg-green-500 hover:bg-green-600 text-black px-6 py-3 rounded-md shadow-lg glow-text transition-all duration-300">ENTER</a>
+      <a href="#" class="border border-green-500 text-green-500 hover:bg-green-500 hover:text-black px-6 py-3 rounded-md shadow-md glow-text transition-all duration-300">ABOUT</a>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+  <script>
+    particlesJS("particles-js", {
+      "particles": {
+        "number": {
+          "value": 180,
+          "density": {
+            "enable": true,
+            "value_area": 800
+          }
+        },
+        "color": { "value": "#00ff00" },
+        "shape": { "type": "circle" },
+        "opacity": {
+          "value": 0.5,
+          "random": true
+        },
+        "size": {
+          "value": 2,
+          "random": true
+        },
+        "line_linked": {
+          "enable": true,
+          "distance": 140,
+          "color": "#00ff00",
+          "opacity": 0.3,
+          "width": 1
+        },
+        "move": {
+          "enable": true,
+          "speed": 1.5,
+          "direction": "none",
+          "out_mode": "bounce"
+        }
+      },
+      "interactivity": {
+        "detect_on": "canvas",
+        "events": {
+          "onhover": { "enable": true, "mode": "repulse" },
+          "onclick": { "enable": true, "mode": "push" },
+          "resize": true
+        },
+        "modes": {
+          "repulse": { "distance": 100, "duration": 0.4 },
+          "push": { "particles_nb": 4 }
+        }
+      },
+      "retina_detect": true
+    });
+  </script>
+</body>
+</html>
