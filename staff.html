@@ -11,6 +11,7 @@
       background: #000;
       color: #0f0;
       font-family: 'Press Start 2P', monospace;
+      overflow: hidden;
     }
     .glow-text {
       text-shadow: 0 0 5px #0f0, 0 0 10px #0f0, 0 0 15px #0f0;
@@ -24,20 +25,50 @@
     }
   </style>
 </head>
-<body class="min-h-screen flex flex-col items-center justify-center p-6">
+<body class="min-h-screen flex flex-col items-center justify-center p-6 relative">
+
+  <div id="particles-js" class="absolute inset-0 -z-10"></div>
 
   <h1 class="text-3xl md:text-5xl glow-text fade-in mb-10">STAB STAFF</h1>
 
-  <a href="crypted.html" class="w-full max-w-md bg-black border-2 border-green-500 p-6 rounded-lg glow-text fade-in transition hover:scale-105 duration-300">
-    <div class="flex flex-col items-center">
-      <img src="https://via.placeholder.com/150x150.png?text=STAFF" alt="Staff Profile" class="rounded-full border-4 border-green-500 mb-4">
-      <h2 class="text-base text-green-400">CRYPTED</h2>
-    </div>
+  <a href="crypted.html" class="block bg-black border-2 border-green-500 p-6 rounded-lg glow-text fade-in text-center transition hover:scale-105 duration-300">
+    <h2 class="text-base text-green-400">CRYPTED</h2>
   </a>
 
   <div class="mt-12">
     <a href="index.html" class="text-green-400 underline glow-text hover:text-green-200 transition duration-300">← Back to Home</a>
   </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+  <script>
+    particlesJS("particles-js", {
+      particles: {
+        number: { value: 160, density: { enable: true, value_area: 800 } },
+        color: { value: "#00ff00" },
+        shape: { type: "circle" },
+        opacity: { value: 0.4, random: true },
+        size: { value: 2, random: true },
+        line_linked: {
+          enable: true, distance: 140, color: "#00ff00",
+          opacity: 0.3, width: 1
+        },
+        move: { enable: true, speed: 1.2, direction: "none", out_mode: "bounce" }
+      },
+      interactivity: {
+        detect_on: "canvas",
+        events: {
+          onhover: { enable: true, mode: "repulse" },
+          onclick: { enable: true, mode: "push" },
+          resize: true
+        },
+        modes: {
+          repulse: { distance: 100, duration: 0.4 },
+          push: { particles_nb: 4 }
+        }
+      },
+      retina_detect: true
+    });
+  </script>
 
 </body>
 </html>
