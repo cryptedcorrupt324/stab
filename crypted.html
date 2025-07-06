@@ -31,12 +31,12 @@
       min-height: 100%;
       object-fit: cover;
       z-index: -2;
-      filter: brightness(0.2);
+      filter: brightness(0.5);
     }
     .overlay {
       position: fixed;
       inset: 0;
-      background: rgba(0, 0, 0, 0.6);
+      background: rgba(0, 0, 0, 0.4);
       z-index: -1;
     }
   </style>
@@ -45,11 +45,10 @@
 
   <video class="bg-video" autoplay muted loop playsinline>
     <source src="bg.mp4" type="video/mp4" />
-    
   </video>
   <div class="overlay"></div>
 
-  <audio autoplay loop>
+  <audio id="bgAudio" autoplay loop>
     <source src="bg-music.mp3" type="audio/mp3" />
   </audio>
 
@@ -63,5 +62,9 @@
     <a href="staff.html" class="text-green-400 underline glow-text hover:text-green-200 transition duration-300">← Back to Staff</a>
   </div>
 
+  <script>
+    const audio = document.getElementById('bgAudio');
+    audio.volume = 0.2;
+  </script>
 </body>
 </html>
