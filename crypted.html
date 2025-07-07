@@ -12,6 +12,7 @@
       color: #0f0;
       font-family: 'Press Start 2P', monospace;
       overflow: hidden;
+      cursor: none;
     }
     .glow-text {
       text-shadow: 0 0 6px #0f0, 0 0 12px #0f0, 0 0 20px #0f0;
@@ -46,6 +47,25 @@
       border-radius: 2rem;
       padding: 3rem;
       transition: transform 0.1s ease-out;
+      will-change: transform;
+    }
+    .trail-letter {
+      position: fixed;
+      color: #0f0;
+      font-family: 'Press Start 2P', monospace;
+      font-size: 12px;
+      pointer-events: none;
+      opacity: 1;
+      user-select: none;
+      text-shadow: 0 0 6px #0f0, 0 0 10px #0f0;
+      animation: fadeTrail 0.8s linear forwards;
+      z-index: 10;
+    }
+    @keyframes fadeTrail {
+      to {
+        transform: translateY(-10px);
+        opacity: 0;
+      }
     }
   </style>
 </head>
@@ -73,11 +93,31 @@
     const audio = document.getElementById('bgAudio');
     audio.volume = 0.2;
 
-    const box = document.getElementById('glassBox');
+    const glass = document.getElementById('glassBox');
+    let hover = false;
+
+    glass.addEventListener('mouseenter', () => hover = true);
+    glass.addEventListener('mouseleave', () => {
+      hover = false;
+      glass.style.transform = '';
+    });
+
     document.addEventListener('mousemove', (e) => {
-      const x = (e.clientX / window.innerWidth - 0.5) * 20;
-      const y = (e.clientY / window.innerHeight - 0.5) * 20;
-      box.style.transform = `translate(${x}px, ${y}px)`;
+      if (hover) {
+        const rect = glass.getBoundingClientRect();
+        const x = e.clientX - rect.left - rect.width / 2;
+        const y = e.clientY - rect.top - rect.height / 2;
+        glass.style.transform = `translate(${x * 0.05}px, ${y * 0.05}px)`;
+      }
+
+      const letter = document.createElement('div');
+      letter.className = 'trail-letter';
+      letter.style.left = `${e.pageX}px`;
+      letter.style.top = `${e.pageY}px`;
+      letter.textContent = String.fromCharCode(65 + Math.floor(Math.random() * 26));
+
+      document.body.appendChild(letter);
+      setTimeout(() => letter.remove(), 800);
     });
   </script>
 </body>
