@@ -39,9 +39,17 @@
       background: rgba(0, 0, 0, 0.4);
       z-index: -1;
     }
+    .glass-follow {
+      background: rgba(0, 255, 0, 0.05);
+      border: 2px solid rgba(0, 255, 0, 0.2);
+      backdrop-filter: blur(6px);
+      border-radius: 2rem;
+      padding: 3rem;
+      transition: transform 0.1s ease-out;
+    }
   </style>
 </head>
-<body class="min-h-screen flex flex-col items-center justify-center p-8 text-center">
+<body class="min-h-screen flex items-center justify-center p-8 text-center">
 
   <video class="bg-video" autoplay muted loop playsinline>
     <source src="bg.mp4" type="video/mp4" />
@@ -52,19 +60,25 @@
     <source src="bg-music.mp3" type="audio/mp3" />
   </audio>
 
-  <h1 class="text-3xl md:text-5xl glow-text fade-in mb-6">CRYPTED</h1>
+  <div id="glassBox" class="glass-follow glow-text fade-in">
+    <h1 class="text-2xl md:text-4xl mb-4">CRYPTED</h1>
+    <p class="text-green-300 text-sm md:text-base">owner.</p>
+  </div>
 
-  <p class="text-green-300 text-sm md:text-base glow-text fade-in max-w-2xl">
-    owner.
-  </p>
-
-  <div class="mt-12">
+  <div class="mt-12 absolute bottom-12">
     <a href="staff.html" class="text-green-400 underline glow-text hover:text-green-200 transition duration-300">← Back to Profiles</a>
   </div>
 
   <script>
     const audio = document.getElementById('bgAudio');
     audio.volume = 0.2;
+
+    const box = document.getElementById('glassBox');
+    document.addEventListener('mousemove', (e) => {
+      const x = (e.clientX / window.innerWidth - 0.5) * 20;
+      const y = (e.clientY / window.innerHeight - 0.5) * 20;
+      box.style.transform = `translate(${x}px, ${y}px)`;
+    });
   </script>
 </body>
 </html>
