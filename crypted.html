@@ -40,16 +40,13 @@
       background: rgba(0, 0, 0, 0.4);
       z-index: -1;
     }
-    .glass-follow {
+    .glass-box {
       background: rgba(0, 255, 0, 0.05);
       border: 2px solid rgba(0, 255, 0, 0.2);
       backdrop-filter: blur(6px);
       border-radius: 2rem;
       padding: 3rem;
-      perspective: 1000px;
-      transform-style: preserve-3d;
-      transition: transform 0.1s ease;
-      will-change: transform;
+      z-index: 5;
     }
     .trail-letter {
       position: fixed;
@@ -82,7 +79,8 @@
     <source src="bg-music.mp3" type="audio/mp3" />
   </audio>
 
-  <div id="glassBox" class="glass-follow glow-text fade-in">
+  <div class="glass-box glow-text fade-in flex flex-col items-center">
+    <img src="https://cdn.discordapp.com/attachments/1355294869022572726/1391852504433557676/0.png?ex=686d6728&is=686c15a8&hm=a438c1e36c1ba9af90c814640d5898718130c80f33ae82c34e909ae48f4f1c84&" alt="Profile Picture" class="w-24 h-24 rounded-full mb-4 border-2 border-green-500" />
     <h1 class="text-2xl md:text-4xl mb-4">CRYPTED</h1>
     <p class="text-green-300 text-sm md:text-base">owner.</p>
   </div>
@@ -94,23 +92,6 @@
   <script>
     const audio = document.getElementById('bgAudio');
     audio.volume = 0.2;
-
-    const box = document.getElementById('glassBox');
-
-    box.addEventListener('mousemove', (e) => {
-      const rect = box.getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
-      const centerX = rect.width / 2;
-      const centerY = rect.height / 2;
-      const rotateX = ((y - centerY) / centerY) * -10;
-      const rotateY = ((x - centerX) / centerX) * 10;
-      box.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
-    });
-
-    box.addEventListener('mouseleave', () => {
-      box.style.transform = `rotateX(0deg) rotateY(0deg)`;
-    });
 
     document.addEventListener('mousemove', (e) => {
       const letter = document.createElement('div');
