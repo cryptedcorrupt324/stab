@@ -48,6 +48,7 @@
       padding: 3rem;
       transition: transform 0.1s ease-out;
       will-change: transform;
+      perspective: 1000px;
     }
     .trail-letter {
       position: fixed;
@@ -94,28 +95,31 @@
     audio.volume = 0.2;
 
     const glass = document.getElementById('glassBox');
-    let hover = false;
+    let isHovering = false;
 
-    glass.addEventListener('mouseenter', () => hover = true);
+    glass.addEventListener('mouseenter', () => isHovering = true);
     glass.addEventListener('mouseleave', () => {
-      hover = false;
-      glass.style.transform = '';
+      isHovering = false;
+      glass.style.transform = `rotateX(0deg) rotateY(0deg)`;
     });
 
     document.addEventListener('mousemove', (e) => {
-      if (hover) {
-        const rect = glass.getBoundingClientRect();
-        const x = e.clientX - rect.left - rect.width / 2;
-        const y = e.clientY - rect.top - rect.height / 2;
-        glass.style.transform = `translate(${x * 0.05}px, ${y * 0.05}px)`;
+      const x = e.clientX;
+      const y = e.clientY;
+      const w = window.innerWidth;
+      const h = window.innerHeight;
+
+      if (isHovering) {
+        const rotateY = ((x / w) - 0.5) * 20;
+        const rotateX = ((y / h) - 0.5) * -20;
+        glass.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
       }
 
       const letter = document.createElement('div');
       letter.className = 'trail-letter';
-      letter.style.left = `${e.pageX}px`;
-      letter.style.top = `${e.pageY}px`;
-      letter.textContent = String.fromCharCode(65 + Math.floor(Math.random() * 26));
-
+      letter.style.left = `${x}px`;
+      letter.style.top = `${y}px`;
+      letter.textContent = String.fromCharCode(33 + Math.floor(Math.random() * 94));
       document.body.appendChild(letter);
       setTimeout(() => letter.remove(), 800);
     });
