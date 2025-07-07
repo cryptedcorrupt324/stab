@@ -46,9 +46,13 @@
       backdrop-filter: blur(6px);
       border-radius: 2rem;
       padding: 3rem;
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
       transition: transform 0.1s ease-out;
       will-change: transform;
-      perspective: 1000px;
+      z-index: 5;
     }
     .trail-letter {
       position: fixed;
@@ -70,7 +74,7 @@
     }
   </style>
 </head>
-<body class="min-h-screen flex items-center justify-center p-8 text-center">
+<body>
 
   <video class="bg-video" autoplay muted loop playsinline>
     <source src="bg.mp4" type="video/mp4" />
@@ -86,7 +90,7 @@
     <p class="text-green-300 text-sm md:text-base">owner.</p>
   </div>
 
-  <div class="mt-12 absolute bottom-12">
+  <div class="mt-12 absolute bottom-12 w-full flex justify-center">
     <a href="staff.html" class="text-green-400 underline glow-text hover:text-green-200 transition duration-300">← Back to Profiles</a>
   </div>
 
@@ -94,35 +98,43 @@
     const audio = document.getElementById('bgAudio');
     audio.volume = 0.2;
 
-    const glass = document.getElementById('glassBox');
+    const box = document.getElementById('glassBox');
     let isHovering = false;
+    let targetX = window.innerWidth / 2;
+    let targetY = window.innerHeight / 2;
+    let currentX = targetX;
+    let currentY = targetY;
 
-    glass.addEventListener('mouseenter', () => isHovering = true);
-    glass.addEventListener('mouseleave', () => {
-      isHovering = false;
-      glass.style.transform = `rotateX(0deg) rotateY(0deg)`;
-    });
+    box.addEventListener('mouseenter', () => isHovering = true);
+    box.addEventListener('mouseleave', () => isHovering = false);
 
     document.addEventListener('mousemove', (e) => {
-      const x = e.clientX;
-      const y = e.clientY;
-      const w = window.innerWidth;
-      const h = window.innerHeight;
-
-      if (isHovering) {
-        const rotateY = ((x / w) - 0.5) * 20;
-        const rotateX = ((y / h) - 0.5) * -20;
-        glass.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
-      }
+      targetX = e.clientX;
+      targetY = e.clientY;
 
       const letter = document.createElement('div');
       letter.className = 'trail-letter';
-      letter.style.left = `${x}px`;
-      letter.style.top = `${y}px`;
+      letter.style.left = `${e.pageX}px`;
+      letter.style.top = `${e.pageY}px`;
       letter.textContent = String.fromCharCode(33 + Math.floor(Math.random() * 94));
       document.body.appendChild(letter);
       setTimeout(() => letter.remove(), 800);
     });
+
+    function animateBox() {
+      if (isHovering) {
+        currentX += (targetX - currentX) * 0.1;
+        currentY += (targetY - currentY) * 0.1;
+        box.style.transform = `translate(-50%, -50%) translate(${currentX - window.innerWidth / 2}px, ${currentY - window.innerHeight / 2}px)`;
+      } else {
+        currentX += (window.innerWidth / 2 - currentX) * 0.1;
+        currentY += (window.innerHeight / 2 - currentY) * 0.1;
+        box.style.transform = `translate(-50%, -50%) translate(${currentX - window.innerWidth / 2}px, ${currentY - window.innerHeight / 2}px)`;
+      }
+      requestAnimationFrame(animateBox);
+    }
+
+    animateBox();
   </script>
 </body>
 </html>
