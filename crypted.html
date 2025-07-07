@@ -46,13 +46,10 @@
       backdrop-filter: blur(6px);
       border-radius: 2rem;
       padding: 3rem;
-      position: absolute;
-      left: 50%;
-      top: 50%;
-      transform: translate(-50%, -50%);
-      transition: transform 0.1s ease-out;
+      perspective: 1000px;
+      transform-style: preserve-3d;
+      transition: transform 0.1s ease;
       will-change: transform;
-      z-index: 5;
     }
     .trail-letter {
       position: fixed;
@@ -74,7 +71,7 @@
     }
   </style>
 </head>
-<body>
+<body class="flex items-center justify-center min-h-screen text-center">
 
   <video class="bg-video" autoplay muted loop playsinline>
     <source src="bg.mp4" type="video/mp4" />
@@ -99,19 +96,23 @@
     audio.volume = 0.2;
 
     const box = document.getElementById('glassBox');
-    let isHovering = false;
-    let targetX = window.innerWidth / 2;
-    let targetY = window.innerHeight / 2;
-    let currentX = targetX;
-    let currentY = targetY;
 
-    box.addEventListener('mouseenter', () => isHovering = true);
-    box.addEventListener('mouseleave', () => isHovering = false);
+    box.addEventListener('mousemove', (e) => {
+      const rect = box.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      const centerX = rect.width / 2;
+      const centerY = rect.height / 2;
+      const rotateX = ((y - centerY) / centerY) * -10;
+      const rotateY = ((x - centerX) / centerX) * 10;
+      box.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+    });
+
+    box.addEventListener('mouseleave', () => {
+      box.style.transform = `rotateX(0deg) rotateY(0deg)`;
+    });
 
     document.addEventListener('mousemove', (e) => {
-      targetX = e.clientX;
-      targetY = e.clientY;
-
       const letter = document.createElement('div');
       letter.className = 'trail-letter';
       letter.style.left = `${e.pageX}px`;
@@ -120,21 +121,6 @@
       document.body.appendChild(letter);
       setTimeout(() => letter.remove(), 800);
     });
-
-    function animateBox() {
-      if (isHovering) {
-        currentX += (targetX - currentX) * 0.1;
-        currentY += (targetY - currentY) * 0.1;
-        box.style.transform = `translate(-50%, -50%) translate(${currentX - window.innerWidth / 2}px, ${currentY - window.innerHeight / 2}px)`;
-      } else {
-        currentX += (window.innerWidth / 2 - currentX) * 0.1;
-        currentY += (window.innerHeight / 2 - currentY) * 0.1;
-        box.style.transform = `translate(-50%, -50%) translate(${currentX - window.innerWidth / 2}px, ${currentY - window.innerHeight / 2}px)`;
-      }
-      requestAnimationFrame(animateBox);
-    }
-
-    animateBox();
   </script>
 </body>
 </html>
