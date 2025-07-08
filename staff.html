@@ -31,20 +31,26 @@
 
   <h1 class="text-3xl md:text-5xl glow-text fade-in mb-10">STAB PROFILES</h1>
 
-  <!-- CRYPTED profile link -->
-  <a href="crypted.html" class="block bg-black border-2 border-green-500 p-6 rounded-lg glow-text fade-in text-center transition hover:scale-105 duration-300 mb-6">
+  <!-- CRYPTED Profile -->
+  <a href="crypted.html" class="block bg-black border-2 border-green-500 p-6 rounded-lg glow-text fade-in text-center transition hover:scale-105 duration-300 mb-4">
     <h2 class="text-base text-green-400">CRYPTED</h2>
   </a>
 
-  <!-- VEX profile link -->
-  <a href="vex.html" class="block bg-black border-2 border-green-500 p-6 rounded-lg glow-text fade-in text-center transition hover:scale-105 duration-300">
+  <!-- VEX Profile -->
+  <a href="vex.html" class="block bg-black border-2 border-green-500 p-6 rounded-lg glow-text fade-in text-center transition hover:scale-105 duration-300 mb-4">
     <h2 class="text-base text-green-400">VEX</h2>
+  </a>
+
+  <!-- STEIN Profile -->
+  <a href="stein.html" class="block bg-black border-2 border-green-500 p-6 rounded-lg glow-text fade-in text-center transition hover:scale-105 duration-300 mb-4">
+    <h2 class="text-base text-green-400">STEIN</h2>
   </a>
 
   <div class="mt-12">
     <a href="index.html" class="text-green-400 underline glow-text hover:text-green-200 transition duration-300">← Back to Home</a>
   </div>
-  
+
+  <!-- Particles background -->
   <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
   <script>
     particlesJS("particles-js", {
@@ -55,10 +61,18 @@
         opacity: { value: 0.4, random: true },
         size: { value: 2, random: true },
         line_linked: {
-          enable: true, distance: 140, color: "#00ff00",
-          opacity: 0.3, width: 1
+          enable: true,
+          distance: 140,
+          color: "#00ff00",
+          opacity: 0.3,
+          width: 1
         },
-        move: { enable: true, speed: 1.2, direction: "none", out_mode: "bounce" }
+        move: {
+          enable: true,
+          speed: 1.2,
+          direction: "none",
+          out_mode: "bounce"
+        }
       },
       interactivity: {
         detect_on: "canvas",
@@ -75,6 +89,5 @@
       retina_detect: true
     });
   </script>
-
 </body>
 </html>
